@@ -28,7 +28,25 @@ Ext.define("MyApp.controller.ProjectsActions", {
                 },
                 {
                     xtype: 'textfield',
-                    itemId: 'projectInput'
+                    itemId: 'projectInput',
+                    enableKeyEvents: true,
+                    maxLength: 100,
+                    listeners: {
+                        keyup: function(field) {
+                            var length = field.getValue().length,
+                            left = field._maxLength - length;
+
+                            if(left === 0) {
+                                field._maxValue = field.getValue();
+                            }
+
+                            if(left < 0) {
+                                field.setValue(field._maxValue);
+                            }
+                        }
+                    }
+                    
+
                 },
                 {
                     text: 'Create',

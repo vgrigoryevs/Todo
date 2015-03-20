@@ -195,15 +195,13 @@ Ext.define("MyApp.controller.BugsActions", {
 
         var bugsStore = Ext.getStore('bugsstore');
 
-        var id = new Date().getTime().toString();
         var descr = Ext.ComponentQuery.query('#descript')[0].getValue();  
         var bugType = Ext.ComponentQuery.query('#bugType')[0].getValue();
         var bugStatus = Ext.ComponentQuery.query('#bugStatus')[0].getValue();
-        var parentId = Ext.ComponentQuery.query('bugs')[0].config.parentRecord.data.ID;
         var descriptionCls = Ext.ComponentQuery.query('#descript')[0].getCls()[0];
         var backgroundCls = Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass;
 
-        if(descr ===""){
+        if(descr === ""){
             Ext.Msg.alert('Warning', 'Please enter new bug description', Ext.emptyFn);
         }
 
@@ -224,15 +222,15 @@ Ext.define("MyApp.controller.BugsActions", {
         }
 
         else {
-        var newBug = Ext.create("MyApp.model.Bug", {
-            ID: id,
-            description: descr,
-            date: new Date(),
-            type: bugType,
-            status: bugStatus,
-            parent: parentId,
-            descriptClass: descriptionCls,
-            backgroundClass: backgroundCls
+            var newBug = Ext.create("MyApp.model.Bug", {
+                ID: new Date().getTime().toString(),
+                description: descr,
+                date: new Date(),
+                type: bugType,
+                status: bugStatus,
+                parent: Ext.ComponentQuery.query('bugs')[0].config.parentRecord.data.ID,
+                descriptClass: descriptionCls,
+                backgroundClass: backgroundCls
 
         });
 
@@ -243,76 +241,76 @@ Ext.define("MyApp.controller.BugsActions", {
         }
     },
 
-onDescription: function(field) {
-    var length = field.getValue().length,
-        left = field._maxLength - length;
+    onDescription: function(field) {
+        var length = field.getValue().length,
+            left = field._maxLength - length;
 
-    if(left === 0) {
-        field._maxValue = field.getValue();
-    }
+        if(left === 0) {
+            field._maxValue = field.getValue();
+        }
 
-    if(left < 0) {
-        field.setValue(field._maxValue);
-    }
-},
+        if(left < 0) {
+            field.setValue(field._maxValue);
+        }
+    },
 
-onTypeChange: function(me, newValue, oldValue, eOpts ) {
-    if(newValue === 0) {
-        Ext.ComponentQuery.query('#bugStatus')[0].setOptions([
-            {
-                text: 'New',
-                value: 0
-            }, {
-                text: 'Fixed',
-                value: 1
-            }
-        ]);
-    }
+    onTypeChange: function(me, newValue, oldValue, eOpts ) {
+        if(newValue === 0) {
+            Ext.ComponentQuery.query('#bugStatus')[0].setOptions([
+                {
+                    text: 'New',
+                    value: 0
+                }, {
+                    text: 'Fixed',
+                    value: 1
+                }
+            ]);
+        }
 
-    else {
-        Ext.ComponentQuery.query('#bugStatus')[0].setOptions([
-            {
-                text: 'New',
-                value: 0
-            }, {
-                text:'Implemented',
-                value: 2
-            }
-        ]);
-    }
-},
+        else {
+            Ext.ComponentQuery.query('#bugStatus')[0].setOptions([
+                {
+                    text: 'New',
+                    value: 0
+                }, {
+                    text:'Implemented',
+                    value: 2
+                }
+            ]);
+        }
+    },
 
-removeClasses: function() {
-    while (Ext.ComponentQuery.query('#descript')[0].getCls()) {
-        var classes = Ext.ComponentQuery.query('#descript')[0].getCls();
+    removeClasses: function() {
+        while (Ext.ComponentQuery.query('#descript')[0].getCls()) {
+            var classes = Ext.ComponentQuery.query('#descript')[0].getCls();
 
-        Ext.ComponentQuery.query('#descript')[0].removeCls(classes[0]);
-    }
-},
+            Ext.ComponentQuery.query('#descript')[0].removeCls(classes[0]);
+        }
+    },
 
-onBlueButton: function() {
-    this.removeClasses();
+    onBlueButton: function() {
+        this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'blueList'; 
+        Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'blueList'; 
 
-    Ext.ComponentQuery.query('#descript')[0].addCls('blueDescript');
-},
+        Ext.ComponentQuery.query('#descript')[0].addCls('blueDescript');
+    },
 
-onRedButton: function() {
-    this.removeClasses();
+    onRedButton: function() {
+        this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'redList';
+        Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'redList';
 
-    Ext.ComponentQuery.query('#descript')[0].addCls('redDescript');
-},
+        Ext.ComponentQuery.query('#descript')[0].addCls('redDescript');
+    },
 
-onYellowButton: function() {
-    this.removeClasses();
+    onYellowButton: function() {
+        this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'yellowList';
+        Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'yellowList';
 
-    Ext.ComponentQuery.query('#descript')[0].addCls('yellowDescript');
-},
+        Ext.ComponentQuery.query('#descript')[0].addCls('yellowDescript');
+    },
 
     onWhiteButton: function() {
         this.removeClasses();

@@ -51,6 +51,7 @@ Ext.define("MyApp.view.BugEditor", {
                 value: "",
                 id: 'descript',
                 itemId: 'descriptField',
+                height: 200,
                 enableKeyEvents: true,
                 maxLength: 255,
                 maxValue: "",
