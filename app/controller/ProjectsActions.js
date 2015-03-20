@@ -79,12 +79,13 @@ Ext.define("MyApp.controller.ProjectsActions", {
     
     onItemDisclose: function(list, record, target, index) {
         var bugsList = {
-            xtype:'bugs'
+            xtype:'bugs',
+            parentRecord: record
         };
 
         var bugsStore = Ext.getStore('bugsstore');
 
-        bugsList._parentRecord = record;
+        //bugsList.parentRecord = record;
 
         bugsStore.clearFilter();
         bugsStore.filter('parent',record.data.ID);

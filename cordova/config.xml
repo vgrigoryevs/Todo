@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.domain.MyApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>TODOs</name>
+    <description>
+        A sample note application
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
+    </feature>
+
+    <platform name="android">
+        <splash src="res/screen/android/land-hdpi.png" density="land-hdpi"/>
+		<splash src="res/screen/android/land-ldpi.png" density="land-ldpi"/>
+		<splash src="res/screen/android/land-mdpi.png" density="land-mdpi"/>
+		<splash src="res/screen/android/land-xhdpi.png" density="land-xhdpi"/>
+
+		<splash src="res/screen/android/port-hdpi.png" density="port-hdpi"/>
+		<splash src="res/screen/android/port-ldpi.png" density="port-ldpi"/>
+		<splash src="res/screen/android/port-mdpi.png" density="port-mdpi"/>
+		<splash src="res/screen/android/port-xhdpi.png" density="port-xhdpi"/>
+     </platform>
+     <preference name="SplashScreen" value="screen" />
+     <preference name="SplashScreenDelay" value="10000" />
+</widget>

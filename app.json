@@ -1,4 +1,22 @@
 {
+    "builds": {
+        "web": {"default": true},
+        "native": {
+            "packager": "cordova",
+            "cordova" : {
+                "config": {
+                    // Uncomment the line below and add the platforms you wish to build for
+                    //"platforms": "ios android",
+
+                    "id": "com.domain.MyApp",
+                    "name": "TODOs",
+                    "platforms": "android"
+                }
+            }
+        }
+    },
+
+                
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */

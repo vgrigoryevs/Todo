@@ -93,14 +93,14 @@ Ext.define("MyApp.controller.BugsActions", {
 
                     handler: function () {
                         Ext.getStore('bugsstore').each(function(rec) {
-                            if(rec.data.parent === Ext.ComponentQuery.query('bugs')[0]._parentRecord.data.ID){
+                            if(rec.data.parent === Ext.ComponentQuery.query('bugs')[0].config.parentRecord.data.ID){
                                 Ext.getStore('bugsstore').remove(rec);
                             }
                         });
                         
                         Ext.getStore('bugsstore').sync();
 
-                        Ext.getStore('projectsstore').remove(Ext.ComponentQuery.query('bugs')[0]._parentRecord);
+                        Ext.getStore('projectsstore').remove(Ext.ComponentQuery.query('bugs')[0].config.parentRecord);
                         Ext.getStore('projectsstore').sync();
 
                         actionSheet.hide();
@@ -154,7 +154,7 @@ Ext.define("MyApp.controller.BugsActions", {
         Ext.ComponentQuery.query('#bugType')[0].setValue(record.data.type);
         Ext.ComponentQuery.query('#bugStatus')[0].setValue(record.data.status);
         Ext.ComponentQuery.query('#descript')[0].addCls(record.data.descriptClass);
-        Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = record.data.backgroundClass;
+        Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = record.data.backgroundClass;
 
         if(record.data.type === 0) { 
             Ext.ComponentQuery.query('#bugStatus')[0].setOptions([
@@ -191,12 +191,13 @@ Ext.define("MyApp.controller.BugsActions", {
 
     onRemoveEditor: function() {
         Ext.ComponentQuery.query('bugview')[0].pop();
-        this.paintBugs();
 
-        if(Ext.ComponentQuery.query('bugeditor')[0]._discloseRecord) {
-            Ext.getStore('bugsstore').remove(Ext.ComponentQuery.query('bugeditor')[0]._discloseRecord);
+        if(Ext.ComponentQuery.query('bugeditor')[0].config._discloseRecord) {
+            Ext.getStore('bugsstore').remove(Ext.ComponentQuery.query('bugeditor')[0].config._discloseRecord);
             Ext.getStore('bugsstore').sync();  
         }
+
+        this.paintBugs();
     },
 
     onSaveEditor: function() {
@@ -208,7 +209,7 @@ Ext.define("MyApp.controller.BugsActions", {
         var descr = Ext.ComponentQuery.query('#descript')[0].getValue();  
         var bugType = Ext.ComponentQuery.query('#bugType')[0].getValue();
         var bugStatus = Ext.ComponentQuery.query('#bugStatus')[0].getValue();
-        var parentId = Ext.ComponentQuery.query('bugs')[0]._parentRecord.data.ID;
+        var parentId = Ext.ComponentQuery.query('bugs')[0].config.parentRecord.data.ID;
         var descriptionCls = Ext.ComponentQuery.query('#descript')[0].getCls()[0];
         var backgroundCls = Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass;
 
@@ -217,7 +218,7 @@ Ext.define("MyApp.controller.BugsActions", {
         }
 
         else if(Ext.ComponentQuery.query('bugeditor')[0]._discloseRecord){
-            var bugEdit = Ext.ComponentQuery.query('bugeditor')[0]._discloseRecord;
+            var bugEdit = Ext.ComponentQuery.query('bugeditor')[0].config._discloseRecord;
             var changes = {
                 description: descr,
                 status: bugStatus,

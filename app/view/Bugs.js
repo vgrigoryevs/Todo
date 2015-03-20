@@ -3,7 +3,7 @@ Ext.define("MyApp.view.Bugs", {
     alias: "widget.bugs",
     config:{
         scrollable:'vertical',
-        layout: 'fit'
+        layout: 'fit',
     },
     initialize: function () {
 
