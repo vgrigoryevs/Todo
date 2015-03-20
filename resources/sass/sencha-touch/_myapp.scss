@@ -45,20 +45,36 @@
   float: left;
 }
 
-.redDescript *:not(.x-field-mask) , .redList {
+.redDescript *:not(.x-field-mask) {
   background-color:#ff6a6a;
 }
 
-.blueDescript *:not(.x-field-mask) , .blueList {
+.redList {
+  color:#ff6a6a;
+}
+
+.blueDescript *:not(.x-field-mask) {
   background-color:#4ab1ff;
 }
 
-.yellowDescript *:not(.x-field-mask) , .yellowList {
+.blueList {
+  color:#4ab1ff;
+}
+
+.yellowDescript *:not(.x-field-mask) {
   background-color:#ffdd0e;
 }
 
-.whiteDescript *:not(.x-field-mask) , .whiteList {
+.yellowList {
+  color:#ffdd0e;
+}
+
+.whiteDescript *:not(.x-field-mask) {
   background-color:#fbf9ed;
+}
+
+.whiteList {
+  color:#000
 }
 
 .aboutView {

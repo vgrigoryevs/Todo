@@ -28,7 +28,6 @@ Ext.define("MyApp.controller.BugsActions", {
             },
 
             bugsList: {
-                disclose: 'onBugDisclose',
                 itemtap: 'itemtap'
 
             },
@@ -70,21 +69,6 @@ Ext.define("MyApp.controller.BugsActions", {
         this.showBug(projectsStore.getAt(index));
 
         setTimeout(function(){record.deselect(index);},1000);
-    },
-
-    onBugDisclose: function() {
-
-    },
-
-    paintBugs: function() {
-        Ext.getStore('bugsstore').each(function(rec) {
-            Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').removeCls('whiteList');
-            Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').removeCls('redList');
-            Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').removeCls('yellowList');
-            Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').removeCls('blueList');
-
-            Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').addCls(rec.data.backgroundClass);
-        });
     },
 
     onBackButtonTap: function() {
@@ -194,7 +178,6 @@ Ext.define("MyApp.controller.BugsActions", {
 
     onBackEditor: function() {
         Ext.ComponentQuery.query('bugview')[0].pop();
-        this.paintBugs();
     },
 
     onRemoveEditor: function() {
@@ -205,7 +188,6 @@ Ext.define("MyApp.controller.BugsActions", {
             Ext.getStore('bugsstore').sync();  
         }
 
-        this.paintBugs();
     },
 
     onSaveEditor: function() {
@@ -219,13 +201,13 @@ Ext.define("MyApp.controller.BugsActions", {
         var bugStatus = Ext.ComponentQuery.query('#bugStatus')[0].getValue();
         var parentId = Ext.ComponentQuery.query('bugs')[0].config.parentRecord.data.ID;
         var descriptionCls = Ext.ComponentQuery.query('#descript')[0].getCls()[0];
-        var backgroundCls = Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass;
+        var backgroundCls = Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass;
 
         if(descr ===""){
             Ext.Msg.alert('Warning', 'Please enter new bug description', Ext.emptyFn);
         }
 
-        else if(Ext.ComponentQuery.query('bugeditor')[0]._discloseRecord){
+        else if(Ext.ComponentQuery.query('bugeditor')[0].config._discloseRecord){
             var bugEdit = Ext.ComponentQuery.query('bugeditor')[0].config._discloseRecord;
             var changes = {
                 description: descr,
@@ -239,7 +221,6 @@ Ext.define("MyApp.controller.BugsActions", {
 
             bugsStore.sync();
             Ext.ComponentQuery.query('bugview')[0].pop();
-            this.paintBugs();
         }
 
         else {
@@ -259,7 +240,6 @@ Ext.define("MyApp.controller.BugsActions", {
         bugsStore.sync();
 
         Ext.ComponentQuery.query('bugview')[0].pop();
-        this.paintBugs();
         }
     },
 
@@ -313,7 +293,7 @@ removeClasses: function() {
 onBlueButton: function() {
     this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = 'blueList'; 
+    Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'blueList'; 
 
     Ext.ComponentQuery.query('#descript')[0].addCls('blueDescript');
 },
@@ -321,7 +301,7 @@ onBlueButton: function() {
 onRedButton: function() {
     this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = 'redList';
+    Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'redList';
 
     Ext.ComponentQuery.query('#descript')[0].addCls('redDescript');
 },
@@ -329,7 +309,7 @@ onRedButton: function() {
 onYellowButton: function() {
     this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = 'yellowList';
+    Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'yellowList';
 
     Ext.ComponentQuery.query('#descript')[0].addCls('yellowDescript');
 },
@@ -337,7 +317,7 @@ onYellowButton: function() {
     onWhiteButton: function() {
         this.removeClasses();
 
-        Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = 'whiteList';
+        Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = 'whiteList';
 
         Ext.ComponentQuery.query('#descript')[0].addCls('whiteDescript');
     }

@@ -24,7 +24,6 @@ Ext.define('MyApp.view.Main', {
                 id: 'aboutTab',
                 cls: 'aboutView'
             }
-                
         ]
     }
 });

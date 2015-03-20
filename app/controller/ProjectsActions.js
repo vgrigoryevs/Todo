@@ -13,7 +13,6 @@ Ext.define("MyApp.controller.ProjectsActions", {
                 tap: "onNewNoteCommand"
             },
             projectsList: {
-                disclose: "onProjectDisclose",
                 itemtap: "onProjectTap"
             }
         }
@@ -39,11 +38,11 @@ Ext.define("MyApp.controller.ProjectsActions", {
                         
                         var value = Ext.ComponentQuery.query("#projectInput")[0].getValue();
 
-                        if(value ===""){
+                        if (value === ""){
                             Ext.Msg.alert('Warning', 'Please enter new project name', Ext.emptyFn);
                         }
                         
-                        else{
+                        else {
                             actionSheet.hide();
                             setTimeout('Ext.Viewport.remove(Ext.ComponentQuery.query("actionsheet")[0])', 1000);
 
@@ -76,10 +75,6 @@ Ext.define("MyApp.controller.ProjectsActions", {
         Ext.Viewport.add(actionSheet);
         actionSheet.show();
     },
-    
-    onProjectDisclose: function(list, record, target, index) {
-
-    },
 
     onProjectTap: function(record, index, item, e) {
         var projectsStore = Ext.getStore('projectsstore');
@@ -102,8 +97,5 @@ Ext.define("MyApp.controller.ProjectsActions", {
         bugsStore.filter('parent',record.data.ID);
 
         Ext.ComponentQuery.query('bugview')[0].push(bugsList);
-        Ext.getStore('bugsstore').each(function(rec) {
-            Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').addCls(rec.data.backgroundClass);
-        });
     }
 });

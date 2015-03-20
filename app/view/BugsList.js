@@ -12,7 +12,7 @@ Ext.define('MyApp.view.BugsList', {
                     'iconBulb',
                 '</tpl>',
                 '<tpl if="status == 0">',
-                    '" ',
+                    ' {backgroundClass}" ',
                 '</tpl>',
                 '<tpl if="status == 1||2">',
                     ' greenBug" ',
