@@ -3,6 +3,6 @@ Ext.define('MyApp.view.ProjectsList', {
     alias: "widget.projectsList",
     config: {
     	onItemDisclosure : true,
-        itemTpl: '{title}'// items
+        itemTpl: '{title:ellipsis(100, true)}'// items
     }
 });

@@ -13,8 +13,8 @@ Ext.define("MyApp.controller.ProjectsActions", {
                 tap: "onNewNoteCommand"
             },
             projectsList: {
-                disclose: "onItemDisclose",
-                itemtap: "onItemTap"
+                disclose: "onProjectDisclose",
+                itemtap: "onProjectTap"
             }
         }
     },
@@ -77,7 +77,18 @@ Ext.define("MyApp.controller.ProjectsActions", {
         actionSheet.show();
     },
     
-    onItemDisclose: function(list, record, target, index) {
+    onProjectDisclose: function(list, record, target, index) {
+
+    },
+
+    onProjectTap: function(record, index, item, e) {
+        var projectsStore = Ext.getStore('projectsstore');
+        this.showBugs(projectsStore.getAt(index));
+
+        setTimeout(function(){record.deselect(index);},1000);
+    },
+
+    showBugs: function(record) {
         var bugsList = {
             xtype:'bugs',
             parentRecord: record
@@ -85,7 +96,7 @@ Ext.define("MyApp.controller.ProjectsActions", {
 
         var bugsStore = Ext.getStore('bugsstore');
 
-        //bugsList.parentRecord = record;
+        bugsList.parentRecord = record;
 
         bugsStore.clearFilter();
         bugsStore.filter('parent',record.data.ID);
@@ -94,9 +105,5 @@ Ext.define("MyApp.controller.ProjectsActions", {
         Ext.getStore('bugsstore').each(function(rec) {
             Ext.get("my_list_item_" + rec.data.ID).up('.x-list-item').addCls(rec.data.backgroundClass);
         });
-    },
-
-    onItemTap: function(record, index, item, e) {
-        setTimeout(function(){record.deselect(index);},1000);
     }
 });

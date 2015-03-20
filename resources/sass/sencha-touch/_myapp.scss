@@ -39,7 +39,7 @@
   font-family: "Pictos";
   content: "F";
   font-size: 4.5em;
-  }
+}
 
 .colorBtn {
   float: left;
@@ -92,3 +92,15 @@
   font-size: 1.5em;
   text-align: center;
 }
+
+.x-list-item {
+  overflow-wrap: break-word;
+  padding-right: 18%;
+}
+
+
+.x-list .x-list-item-tpl .x-list-disclosure {
+  top: 50%;
+  margin-top: -1em;
+}
+  

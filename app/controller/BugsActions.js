@@ -66,7 +66,14 @@ Ext.define("MyApp.controller.BugsActions", {
     },
 
     itemtap: function(record, index, item, e) {
+        var projectsStore = Ext.getStore('bugsstore');
+        this.showBug(projectsStore.getAt(index));
+
         setTimeout(function(){record.deselect(index);},1000);
+    },
+
+    onBugDisclose: function() {
+
     },
 
     paintBugs: function() {
@@ -140,7 +147,8 @@ Ext.define("MyApp.controller.BugsActions", {
         actionSheet.show();
     },
 
-    onBugDisclose: function(list, record, target, index) {
+
+    showBug: function(record){
         var bugEditor = {
             xtype:'bugeditor'
         };
@@ -153,14 +161,15 @@ Ext.define("MyApp.controller.BugsActions", {
         Ext.ComponentQuery.query('#bugDate')[0].setValue(Ext.util.Format.date(record.data.date, 'm/d/Y - H:i:s')); 
         Ext.ComponentQuery.query('#bugType')[0].setValue(record.data.type);
         Ext.ComponentQuery.query('#bugStatus')[0].setValue(record.data.status);
+
         Ext.ComponentQuery.query('#descript')[0].addCls(record.data.descriptClass);
         Ext.ComponentQuery.query('bugeditor')[0].config._backgroundClass = record.data.backgroundClass;
 
         if(record.data.type === 0) { 
             Ext.ComponentQuery.query('#bugStatus')[0].setOptions([
                 {
-                 text: 'New',
-                 value: 0
+                    text: 'New',
+                    value: 0
                 }, 
                 {
                  text: 'Fixed',
@@ -181,7 +190,6 @@ Ext.define("MyApp.controller.BugsActions", {
                 }
             ]);
         }  
-        
     },
 
     onBackEditor: function() {
@@ -257,7 +265,7 @@ Ext.define("MyApp.controller.BugsActions", {
 
 onDescription: function(field) {
     var length = field.getValue().length,
-    left = field._maxLength - length;
+        left = field._maxLength - length;
 
     if(left === 0) {
         field._maxValue = field.getValue();
@@ -326,12 +334,12 @@ onYellowButton: function() {
     Ext.ComponentQuery.query('#descript')[0].addCls('yellowDescript');
 },
 
-onWhiteButton: function() {
-    this.removeClasses();
+    onWhiteButton: function() {
+        this.removeClasses();
 
-    Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = 'whiteList';
+        Ext.ComponentQuery.query('bugeditor')[0]._backgroundClass = 'whiteList';
 
-    Ext.ComponentQuery.query('#descript')[0].addCls('whiteDescript');
-}
+        Ext.ComponentQuery.query('#descript')[0].addCls('whiteDescript');
+    }
     
 });
