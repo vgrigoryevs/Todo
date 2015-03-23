@@ -17,12 +17,24 @@
     vertical-align: sub;
 }
 
+.iconBug {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1px;
+}
+
 .iconBulb::before { 
     content: "\e600";
     font-family: "wtccustomicons";
     font-size: 1.4em;
     margin-right: 5%;
     vertical-align: sub;
+}
+
+.iconBulb {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1px;
 }
 
 .greyDate * {
@@ -120,3 +132,12 @@
   margin-top: -1em;
 }
   
+.bug-description {
+  margin-left: 1em;
+  word-break: break-word;
+}
+
+.bug-list .x-inner .x-container .x-body .x-scroll-container .x-inner .x-list-item .x-innerhtml  {
+  display:table;
+}
+

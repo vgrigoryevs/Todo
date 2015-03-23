@@ -6,7 +6,7 @@ Ext.define("MyApp.model.Project", {
             { name: 'title', type: 'string' }
         ],
         validations: [
-        	{ type: 'length', name: 'title', min: 3}
+        	{ field: 'title', type:'presence', message:'Enter name of the project'}
         ] 
 
     }

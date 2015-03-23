@@ -56,20 +56,26 @@ Ext.define("MyApp.controller.ProjectsActions", {
                         
                         var value = Ext.ComponentQuery.query("#projectInput")[0].getValue();
 
-                        if (value === ""){
-                            Ext.Msg.alert('Warning', 'Please enter new project name', Ext.emptyFn);
+                        var id = new Date().getTime().toString();
+
+                        var newProject = Ext.create("MyApp.model.Project", {
+                            ID: id,
+                            title: value
+                        });
+
+                        var errors = newProject.validate();
+                        var errorMessage = '';
+
+                        if (!errors.isValid()){
+                            errors.each(function (err) {
+                                errorMessage += err.getMessage();
+                            });
+                            Ext.Msg.alert('Form is invalid!', errorMessage);
                         }
                         
                         else {
                             actionSheet.hide();
                             setTimeout('Ext.Viewport.remove(Ext.ComponentQuery.query("actionsheet")[0])', 1000);
-
-                            var id = new Date().getTime().toString();
-
-                            var newProject = Ext.create("MyApp.model.Project", {
-                                ID: id,
-                                title: value
-                            });
 
                             var projectsStore = Ext.getStore('projectsstore');
                             
@@ -77,6 +83,7 @@ Ext.define("MyApp.controller.ProjectsActions", {
 
                             projectsStore.sync();
                         }
+                        
                     }
                 }, {
                     text: 'Cancel',
